@@ -11,27 +11,6 @@ var ObjectId = Types.ObjectId;
 
 module.exports = {
 	CourseQuery: {
-		GetCourse: {
-			async getCourse(_, {
-				query
-			}, context) {
-				try {
-					const fuzzyQuery = new RegExp(escapeRegex(query), 'gi');
-					const courses = await Course.find(
-						{
-							$or: [{
-								courseID: fuzzyQuery
-							}, {
-								courseTitle: fuzzyQuery
-							}]
-						}
-					);
-					return courses;
-				} catch (err) {
-					throw new Error(err);
-				}
-			}
-		},
 		GetCourseDetail: {
 			async getCourseDetail(_,
 			{

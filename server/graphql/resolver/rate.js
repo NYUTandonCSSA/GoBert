@@ -10,6 +10,7 @@ const checkAuth = require('../../utils/checkAuth');
 
 module.exports = {
     Query: {
+      // given rateID. return the rate
       async getOneRating(_, {rateId}){
         try{
           return await Rate.findById(rateId);
@@ -17,6 +18,8 @@ module.exports = {
           throw new Error(err);
         }
       },
+      // given courseID, courseTitle, professorname, return all the ratings of that 
+      // courseID+courseTitle+Professor 
       async getRatings(_,
       {
         searchCourseInput: {
@@ -39,6 +42,7 @@ module.exports = {
         }
       }
     },
+
     Mutation: {
       async postRate(_, { 
         rateInput: {
@@ -51,7 +55,8 @@ module.exports = {
         const user = checkAuth(context);
         try{
           // TODO: Fault Tolerant, if anything fail, nothing should be committed.
-          // check if that user already rate the course
+          
+          // Check if that user already rate the course
           const oldRate = await Rate.findOne({
             username: user.username,
             courseID,
@@ -61,12 +66,16 @@ module.exports = {
           if (oldRate) {
             throw Error("User already rated this course");
           }
+          
+          // Check if the professor exists
           const currProf = await Professor.findOne({
             name: professor
           });
           if (!currProf){
             throw Error("professor " + professor + " not exists");
           }
+
+          // Check if the course exists
           const currCourse = await Course.findOne({
             courseID,
             courseTitle
@@ -74,7 +83,8 @@ module.exports = {
           if (!currCourse) {
             throw Error("course " + courseID + ": " + courseTitle + " not exists");
           }
-          // Rate
+
+          // create a new rate
           const newRate = new Rate({
             username: user.username,
             courseTitle, courseID, courseScore,
@@ -150,6 +160,7 @@ module.exports = {
         }
       },
 
+      // deleteRate follows a similar logic to postRate
       async deleteRate(_, { rateId }, context){
         const user = checkAuth(context);
         try{

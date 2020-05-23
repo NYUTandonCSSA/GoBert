@@ -11,7 +11,7 @@ module.exports = {
 - npm i
 - npm start
 
-##### you can try the following code out in localhost:4000 playground, please see https://graphql.org/graphql-js/graphql-clients/ for client side code
+##### you can try the following code out in localhost:4000/playground, please see https://graphql.org/graphql-js/graphql-clients/ for client side code
 ##### Mutation API
 ```
 mutation {

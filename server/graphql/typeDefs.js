@@ -1,28 +1,6 @@
 const { gql } = require('apollo-server');
 
 module.exports = gql`
-	type GobertResult {
-		category: String
-		professor: String
-		courseID: String
-		courseTitle: String
-		score: Float
-		numRate: Int
-		name: String
-		_id: String
-	}
-
-	type RmpResult {
-		category: String
-    	name: String,
-		score: String,
-		department: String,
-		wouldTakeAgain: String,
-		levelOfDifficulty: String,
-		tags: [String],
-		_id: String
-	}
-
 	type searchResult{
 		category: String
 		name: String
@@ -30,7 +8,6 @@ module.exports = gql`
 		courseTitle: String
 		score: Float
 		numRate: Int
-		
 		rscore: Float
 		rnumRate: Int
 		department: String
@@ -66,6 +43,7 @@ module.exports = gql`
 		ratings: [Rate]
 		course_id: String
 	}
+
 	type Professor {
 		name: String
 		score: Float
@@ -79,6 +57,7 @@ module.exports = gql`
 		levelOfDifficulty: String,
 		tags: [String]
 	}
+
 	type Course {
 		courseID: String
 		courseTitle: String
@@ -88,6 +67,7 @@ module.exports = gql`
 		priority: String
 		_id: String
 	}
+
 	type Section {
 		courseID: String
 		courseTitle: String
@@ -99,6 +79,7 @@ module.exports = gql`
 		status: String
 		professor: String
 	}
+
 	type User {
 		email: String!
 		username: String!
@@ -107,11 +88,13 @@ module.exports = gql`
 		major: String
 		createdAt: String!
 	}
+
 	input SearchCourseInput {
 		cID: String!
 		cTitle: String!
 		professor: String
 	}
+
 	input RateInput {
 		courseID: String!
 		courseTitle: String!
@@ -122,6 +105,7 @@ module.exports = gql`
 		anonymity: Boolean!
 		comment: String!
 	}
+
 	type RateOutput {
 		alreadyRate: Boolean
 	  	username: String
@@ -183,16 +167,12 @@ module.exports = gql`
 		semesters: [String]
 		courses: [Course]
 	}
-	input shoppingCartItem {
-		courseID: String
-		courseTitle: String
-	}
+
 	type Query{
 		getSearchResult(query: String!): [searchResult]
-		getProfessorByName(query: String!): [Professor]
 		getProfessorDetail(query: String!): Professor
-		getCourse(query: String!): [Course]
 		getCourseDetail(id: ID!): Course
+		
 		getOneRating(rateId: ID!): Rate
 		getRatings(searchCourseInput: SearchCourseInput): [Rate]
 		getShoppingCart(username: String!): ShoppingCart

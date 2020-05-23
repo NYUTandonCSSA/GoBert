@@ -1,3 +1,5 @@
+// Some utility functions to clear the backend data. Non-essential
+
 const Course = require('../../models/Course');
 const Professor = require('../../models/Professor');
 const Rate = require('../../models/Rate');

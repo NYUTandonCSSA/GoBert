@@ -7,25 +7,6 @@ const Course = require('../../models/Course');
 
 module.exports = {
   ProfQuery: {
-    GetProfessorByName: {
-      // at first, the frontend will trigger this function
-      // dependent on the number of replies, the frontend should have logic to instruct the users
-      // if the length of response is 1, then call the below function directly
-      // else: ask the client which one is he looking for by listing all the names
-      async getProfessorByName(_, {
-        query
-      }, context) {
-        try {
-          const fuzzyProf = new RegExp(escapeRegex(query), 'gi');
-          const professors = await Professor.find({
-            name: fuzzyProf
-          });
-          return professors;
-        } catch (err) {
-          throw new Error(err);
-        }
-      }
-    },
     GetProfessorDetail: {
       // if empty, means no result
       async getProfessorDetail(_, {
@@ -62,8 +43,6 @@ module.exports = {
                   courseID: courseID,
                   courseTitle: courseTitle
                 });
-
-
 
                 if (!rating){
                     rating = {

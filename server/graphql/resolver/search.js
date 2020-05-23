@@ -11,7 +11,6 @@ async function searchRMP(query){
   // check if ',' in query: split it, find fname and lname
   // else: split by space, treat the first as fname, the last as lname
   // do a search with fullname.
-
   // if the query doesn't contain comma nor space
   if (!query.includes(',') && !query.includes(' ')) {
     const fuzzyQuery = new RegExp(escapeRegex(query), 'gi');
@@ -82,6 +81,8 @@ async function searchRMP(query){
   return await professors;
 }
 
+
+// exact same logic. Maybe combine the database of RMP and professor together?
 async function searchProfessor(query){
   // check if ',' in query: split it, find fname and lname
   // else: split by space, treat the first as fname, the last as lname
@@ -164,16 +165,13 @@ async function searchCourse(query){
   // TODO
   // remove special characters
   // search courseID union courseTitle union _total
-
   // remove special characters and turm all consecutive white spaces into one white space
   
   query = query.replace('\n', ' ');
-
   const albert_regex = /[a-z]+-[a-z]+ [0-9a-z]+-[0-9a-z]+ \([0-9]+\)/g;
-  
+
   if (query.match(albert_regex)){
     const s = query.split('-');
-
     query = s[0] + s[1];
   }
 
@@ -233,36 +231,14 @@ async function searchGobert(query){
     return 0;
   }
 
-  // if (professors.length === 0 && courses.length === 0) {
-  //   console.log('failed to search using the exact mode, transit to blurry mode');
-
-  //   var lookupRegex = [];
-  //   for (var i = lookupWords.length - 1; i >= 0; i--) {
-  //     lookupRegex.push(new RegExp(escapeRegex(lookupWords[i]), 'gi'));
-  //   }
-  //   professors = await Professor.find({
-  //     name: {
-  //       $in: lookupRegex
-  //     }
-  //   });
-
-  //   courses = await Course.find({
-  //     _total: {
-  //       $in: lookupRegex
-  //     }
-  //   });
-  // }
-
   for (let i = 0; i < professors.length; i++) {
     professors[i]['category'] = 'Professor';
     professors[i]['professor'] = professors[i]['name'];
   }
-
   for (let i = 0; i < courses.length; i++) {
     courses[i]['category'] = 'Course';
     courses[i]['name'] = courses[i]['courseID'] + ': ' + courses[i]['courseTitle'];
   }
-
   var result = professors.concat(courses);
 
   for (let i = 0; i < result.length; i++) {
@@ -284,14 +260,7 @@ module.exports = {
           if (try_length_of_query.length < 3){
             throw new Error("Your search didn't return any results");
           }
-
           const gobertResult = await searchGobert(query);
-          // const rmpResult = await searchRMP(query);
-          // const result = {
-          //   "gobert": gobertResult,
-          //   "rmp": rmpResult
-          // }
-
           if (gobertResult.length == 0){
             throw new Error("Your search didn't return any results");
           }

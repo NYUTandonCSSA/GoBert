@@ -1,3 +1,5 @@
+// THIS FILE NEEDS REORGANIZED
+// THE ALGORITHM USED HERE FOR SCHEDULE GENERATION IS PRETTY MESSY
 
 const User = require('../../models/User');
 const Course = require('../../models/Course');
