@@ -11,6 +11,17 @@ module.exports = {
 - npm i
 - npm start
 
+## Project Map
+- [/graphql](graphql/) the backend api logic
+  - [/resolvers](graphql/resolvers) all the backend functions are here
+    - [index.js](graphql/resolvers/index.js): entry point of the resolvers
+    - other resolvers
+    - [shoppingCart.js](graphql/resolvers/shoppingCart.js) needs to be refactored
+  - [typeDefs.js](graphql/typeDefs.js) the signature of api calls
+- [/models](models/) the data model in mongodb
+- [/public](public/) the frontend build folder
+- [/utils](utils/) some utility functions
+
 ##### you can try the following code out in localhost:4000/playground, please see https://graphql.org/graphql-js/graphql-clients/ for client side code
 ##### Mutation API
 ```
