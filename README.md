@@ -8,6 +8,7 @@
 **See** [backend README.md](./server/README.md)
 
 ## TODO
+0. Refactor of the backend database for an easier way to do score calculation for courses/professors
 1. A way to do data integration
   - When new semester comes, how to incorporate the courses information into the original database without doing a reload. A python/node script which interacts with the mongodb is needed.
 2. A better crawler for crawling course information
