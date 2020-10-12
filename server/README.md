@@ -1,3 +1,10 @@
+## TODOs
+- Refactor backend score calculation logic
+- Refactor backend database
+- A better way to crawl courses (should we give up status of a course?)
+- Frontend: a better way to demonstrate "professor's score with the course", right now the idea is a little confusing.
+
+
 ## GraphQL, MongoDB and Express
 - add a config.js file of the format with the following content. This role has a read only access to the database. If you need write access, please contact me directly.
 config.js
