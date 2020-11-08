@@ -18,7 +18,7 @@ module.exports = {
       }
     },
     // given courseID, courseTitle, professorname, return all the ratings of that
-    // courseID + courseTitle+Professor
+    // courseID + courseTitle + Professor
     async getRatings(
       _,
       { searchCourseInput: { cID, cTitle, professor } },
@@ -39,6 +39,14 @@ module.exports = {
   },
 
   Mutation: {
+    // post a rate
+    // 1. check user login
+    // 2. check if oldrate existed
+    // 3. check if prof existed
+    // 4. check if the course existed
+    // 5. save a new rate
+    // 6. update the rate summary for future read operations
+    // 7. update the course and professor summary
     async postRate(
       _,
       {
@@ -199,6 +207,8 @@ module.exports = {
     },
 
     // deleteRate follows a similar logic to postRate
+    // besides that when we only have 1 rate to be deleted
+    // we will store the score as 0
     async deleteRate(_, { rateId }, context) {
       const user = checkAuth(context)
       try {

@@ -23,6 +23,7 @@ module.exports = {
             courseID: course.courseID,
             courseTitle: course.courseTitle,
           })
+
           var courseStats = []
           for (let i = 0; i < sections.length; i++) {
             const prof = sections[i]['professor']
@@ -59,6 +60,7 @@ module.exports = {
             }
             courseStats.push(rating)
           }
+          
           course['score'] = displayScoreRound(course['score'])
           course['rateSummary'] = courseStats
           return course

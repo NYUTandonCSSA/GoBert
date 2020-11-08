@@ -169,11 +169,6 @@ async function searchProfessor(query) {
 }
 
 async function searchCourse(query) {
-  // TODO
-  // remove special characters
-  // search courseID union courseTitle union _total
-  // remove special characters and turm all consecutive white spaces into one white space
-
   query = query.replace('\n', ' ')
   const albert_regex = /[a-z]+-[a-z]+ [0-9a-z]+-[0-9a-z]+ \([0-9]+\)/g
 
